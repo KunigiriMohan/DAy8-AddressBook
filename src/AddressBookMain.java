@@ -9,10 +9,13 @@ class AddressBookMain {
         person = new ArrayList<contact>();
     }
 
-    // Add a contact that's passed in as a parameter.
+    /*
+     * addContact() to add new created contacts to address book
+     * */
     public void addContact(contact c) {
         person.add(c);
     }
+
     /*
      * menu() method for showing options user has
      * */
@@ -20,7 +23,8 @@ class AddressBookMain {
     {
         System.out.println("Press 1 for Adding a new contact to your address book.");
         System.out.println("Press 2 for Editing Existing contact");
-        System.out.println("Press 3 to Quit.");
+        System.out.println("Press 3 for Deleting Existing Contact");
+        System.out.println("Press 4 to Quit.");
     }
 
     /*
@@ -33,7 +37,9 @@ class AddressBookMain {
 
         return -1;
     }
-    // method for Editing existing contact
+    /*
+     *editContact() to edit existing contacts
+     **/
     public void editContact(String s) {
         Scanner inp = new Scanner(System.in);
         int place = haveContact(s);
@@ -58,6 +64,15 @@ class AddressBookMain {
         {
             System.out.println("\nFirst Name Not Match\n");
         }
+    }
+
+    /**
+     * method for deleting contacts
+     */
+    public void deleteContact(String s) {
+        int place = haveContact(s);
+        if (place >= 0)
+            person.remove(place);
     }
 
     public static void main(String[] args) {
@@ -88,10 +103,13 @@ class AddressBookMain {
                 System.out.println("Enter the First Name of the contact you want to edit?");
                 String fName = inp.next();
                 obj.editContact(fName);
-
+            }
+            else if (choice == 3) {
+                System.out.println("What is the First name of the contact you want to delete?");
+                String fName = inp.next();
+                obj.deleteContact(fName);
             }
             choice = inp.nextInt();
         }
     }
-
 }
